@@ -38,7 +38,8 @@ function noteFromData(data) {
     id: data.id,
     bookId: data.book_id,
     content: data.content,
-    createdAt: data.created_at
+    createdAt: data.created_at,
+    tags: []
   }
 }
 

@@ -109,6 +109,28 @@ app.post('/book', async (req, res) => {
   res.status(201).send(bookRes)
 })
 
+app.delete('/book', async (req, res) => {
+  const pool = new Pool(pgConfig)
+  const id = req.query.id
+  let deleteRes
+
+  if (!id) {
+    return res.status(400).send('Missing required id param')
+  }
+
+  try {
+    deleteREs = await pool.query(
+      `DELETE FROM books where id = $1`,
+      [id]
+    )
+  } catch(e) {
+    console.log(e)
+    return res.status(500).send(e)
+  }
+
+  res.status(200).send(id)
+})
+
 app.post('/note', async (req, res) => {
   const pool = new Pool(pgConfig)
   const note = req.body
